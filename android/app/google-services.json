@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "873280351713",
+    "project_id": "cinoscope-9075a",
+    "storage_bucket": "cinoscope-9075a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873280351713:android:6affceff5d1cc5aaaf76a0",
+        "android_client_info": {
+          "package_name": "com.example.cinescope"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfUBkKXRbYDiEut2Jijy1lIn7dfnM0lA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
