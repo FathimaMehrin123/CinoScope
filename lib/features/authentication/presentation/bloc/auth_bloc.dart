@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:cinescope/core/bloc/app_bloc.dart';
+import 'package:cinescope/core/di/injection.dart';
+import 'package:cinescope/core/session/app_session.dart';
 import 'package:cinescope/features/authentication/domain/entities/user.dart';
 import 'package:cinescope/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:flutter/foundation.dart';
@@ -18,6 +21,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
+        final session = AppSession(user.email, user.id);
+        getIt<AppBloc>().add(UserLoggedIn(session));
 
         emit(Authenticated(user));
       } catch (e) {
@@ -38,5 +43,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthError("Signup failed"));
       }
     });
+    // on<LogoutRequested>((event, emit) async {
+    //   emit(AuthLoading());
+    //   try {
+    //     await repository.logout();
+    //     getIt<AppBloc>().add(UserLoggedOut());
+    //     emit(Unauthenticated());
+    //   } catch (e) {
+    //     emit(AuthError("logout failed"));
+    //   }
+    // });
   }
 }

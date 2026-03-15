@@ -1,3 +1,4 @@
+import 'package:cinescope/core/session/session_manager.dart';
 import 'package:cinescope/features/authentication/data/datasources/auth_remote_datasource.dart';
 import 'package:cinescope/features/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:cinescope/features/authentication/domain/repositories/auth_repository.dart';
@@ -26,4 +27,5 @@ Future<void> configureDependencies() async {
 
   // Auth Bloc
   getIt.registerFactory(() => AuthBloc(getIt()));
+  getIt.registerLazySingleton(() => SessionManager());
 }

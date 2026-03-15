@@ -1,9 +1,12 @@
+import 'package:cinescope/core/bloc/app_bloc.dart';
+import 'package:cinescope/core/di/injection.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main()async {
-  WidgetsFlutterBinding.ensureInitialized();                 
-  await Firebase.initializeApp();                  
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -12,8 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
- 
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<AppBloc>()..add(AppStarted())),
+      ],
+
+      child: MaterialApp(),
     );
   }
 }
