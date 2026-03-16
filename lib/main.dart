@@ -1,3 +1,4 @@
+import 'package:cinescope/core/app_view.dart';
 import 'package:cinescope/core/bloc/app_bloc.dart';
 import 'package:cinescope/core/di/injection.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await configureDependencies();
   runApp(MyApp());
 }
 
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<AppBloc>()..add(AppStarted())),
       ],
 
-      child: MaterialApp(),
+      child: AppView(),
     );
   }
 }
