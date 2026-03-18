@@ -1,10 +1,12 @@
 import 'package:cinescope/core/bloc/app_bloc.dart';
+import 'package:cinescope/core/network/api_client.dart';
 import 'package:cinescope/core/session/session_manager.dart';
 import 'package:cinescope/features/authentication/data/datasources/auth_remote_datasource.dart';
 import 'package:cinescope/features/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:cinescope/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:cinescope/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
@@ -32,4 +34,7 @@ Future<void> configureDependencies() async {
   getIt.registerLazySingleton(
     () => AppBloc(getIt<SessionManager>(), getIt<FirebaseAuth>()),
   );
+
+  getIt.registerLazySingleton(() => Dio());
+  getIt.registerLazySingleton(() => ApiClient(getIt()));
 }
