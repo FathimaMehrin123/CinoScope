@@ -21,7 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
-        final session = AppSession(user.email, user.id);
+        final session = AppSession(user.id, user.email);
         getIt<AppBloc>().add(UserLoggedIn(session));
 
         emit(Authenticated(user));
@@ -37,21 +37,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final user = await repository.signup(
           email: event.email,
           password: event.password,
+          name:event.name
         );
+
+        final session = AppSession(user.id, user.email);
+        getIt<AppBloc>().add(UserLoggedIn(session));
+
         emit(Authenticated(user));
       } catch (e) {
         emit(AuthError("Signup failed"));
       }
     });
-    // on<LogoutRequested>((event, emit) async {
-    //   emit(AuthLoading());
-    //   try {
-    //     await repository.logout();
-    //     getIt<AppBloc>().add(UserLoggedOut());
-    //     emit(Unauthenticated());
-    //   } catch (e) {
-    //     emit(AuthError("logout failed"));
-    //   }
-    // });
+    on<LogoutRequested>((event, emit) async {
+      emit(AuthLoading());
+      try {
+        await repository.logout();
+        getIt<AppBloc>().add(UserLoggedOut());
+        emit(Unauthenticated());
+      } catch (e) {
+        emit(AuthError("logout failed"));
+      }
+    });
   }
 }

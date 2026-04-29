@@ -71,4 +71,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'cinoscope-9075a.firebasestorage.app',
     iosBundleId: 'com.example.cinescope',
   );
+
 }

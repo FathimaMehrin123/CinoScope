@@ -1,4 +1,5 @@
 import 'package:cinescope/core/bloc/app_bloc.dart';
+import 'package:cinescope/features/authentication/presentation/screens/homescreen.dart';
 import 'package:cinescope/features/authentication/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,10 +16,17 @@ class AppView extends StatelessWidget {
             body: Center(child: CircularProgressIndicator()),
           );
         }
-        if(state is AppAuthenticated){
-         // return homesc
+        if (state is AppAuthenticated) {
+          // return homesc
+          return Homescreen();
         }
-        return LoginScreen();
+
+        if (state is AppUnauthenticated) {
+          return LoginScreen();
+        }
+            return const Scaffold(
+        body: Center(child: Text("Something went wrong")),
+      );
       },
     );
   }

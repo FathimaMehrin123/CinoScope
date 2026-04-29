@@ -1,13 +1,15 @@
 import 'package:cinescope/core/app_view.dart';
 import 'package:cinescope/core/bloc/app_bloc.dart';
 import 'package:cinescope/core/di/injection.dart';
+import 'package:cinescope/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:cinescope/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await configureDependencies();
   runApp(MyApp());
 }
@@ -20,9 +22,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => getIt<AppBloc>()..add(AppStarted())),
-      ],
 
-      child: AppView(),
+        BlocProvider(create: (_) => getIt<AuthBloc>()),
+      ],
+      child: MaterialApp(debugShowCheckedModeBanner: false, home: AppView()),
     );
   }
 }

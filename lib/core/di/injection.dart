@@ -1,5 +1,5 @@
 import 'package:cinescope/core/bloc/app_bloc.dart';
-import 'package:cinescope/core/network/api_client.dart';
+//import 'package:cinescope/core/network/api_client.dart';
 import 'package:cinescope/core/session/session_manager.dart';
 import 'package:cinescope/features/authentication/data/datasources/auth_remote_datasource.dart';
 import 'package:cinescope/features/authentication/data/repositories/auth_repository_impl.dart';
@@ -36,5 +36,5 @@ Future<void> configureDependencies() async {
   );
 
   getIt.registerLazySingleton(() => Dio());
-  getIt.registerLazySingleton(() => ApiClient(getIt()));
+ // getIt.registerLazySingleton(() => ApiClient(getIt()));
 }
